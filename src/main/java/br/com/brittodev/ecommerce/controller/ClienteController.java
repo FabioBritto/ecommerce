@@ -1,4 +1,4 @@
-package br.com.brittodev.ecommerce.dao;
+package br.com.brittodev.ecommerce.controller;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class ClienteController {
 		return cliente != null ? ResponseEntity.ok(cliente) : ResponseEntity.notFound().build();
 	}
 	
-	@PutMapping("clientes/{id}")
+	@PutMapping("/clientes/{id}")
 	public ResponseEntity<Cliente> update(@RequestBody Cliente cliente, @PathVariable Integer id) {
 		cliente.setId(id);
 		try {
@@ -52,6 +52,7 @@ public class ClienteController {
 		return ResponseEntity.badRequest().build();
 	}
 	
+	@PostMapping("/clientes")
 	public ResponseEntity<Cliente> create(@RequestBody Cliente cliente) {
 		Cliente clienteCadastrado = null;
 		try{
