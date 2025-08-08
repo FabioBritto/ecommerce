@@ -2,6 +2,7 @@ package br.com.brittodev.ecommerce.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -41,6 +43,9 @@ public class Produto {
     joinColumns = @JoinColumn(name = "id_produto"),
     inverseJoinColumns = @JoinColumn( name = "id_categoria"))
 	private List<Categoria> categorias;
+	
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+	private List<VarianteProduto> variantes;
 
 	public Integer getId() {
 		return id;
@@ -96,6 +101,14 @@ public class Produto {
 
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
+	}
+
+	public List<VarianteProduto> getVariantes() {
+		return variantes;
+	}
+
+	public void setVariantes(List<VarianteProduto> variantes) {
+		this.variantes = variantes;
 	}
 	
 	
