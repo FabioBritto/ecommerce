@@ -25,9 +25,11 @@ public class VarianteProdutoController {
 	
 	@PostMapping("/variantes")
 	public ResponseEntity<VarianteProduto> create(@RequestBody VarianteProduto variante) {
+		System.out.println(variante);
 		VarianteProduto v = service.create(variante);
 		if (v != null) {
 			return ResponseEntity.status(HttpStatus.CREATED).build();
+			//return ResponseEntity.ok(v);
 		}
 		return ResponseEntity.badRequest().build();
 	}

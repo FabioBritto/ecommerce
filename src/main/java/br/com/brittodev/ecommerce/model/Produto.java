@@ -2,6 +2,8 @@ package br.com.brittodev.ecommerce.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -44,6 +46,7 @@ public class Produto {
     inverseJoinColumns = @JoinColumn( name = "id_categoria"))
 	private List<Categoria> categorias;
 	
+	@JsonIgnoreProperties("produto")
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
 	private List<VarianteProduto> variantes;
 

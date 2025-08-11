@@ -1,5 +1,8 @@
 package br.com.brittodev.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,9 +31,13 @@ public class VarianteProduto {
 	@Column(name = "link_foto", length = 255)
 	private String linkFoto;
 	
+	@JsonIgnoreProperties("variantes")
 	@ManyToOne
 	@JoinColumn(name = "tb_produto_id_produto")
 	private Produto produto;
+	
+	@OneToMany
+	@JoinColumn(name = "")
 	
 
 	public Integer getId() {
@@ -62,6 +70,22 @@ public class VarianteProduto {
 
 	public void setLinkFoto(String linkFoto) {
 		this.linkFoto = linkFoto;
+	}
+
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "VarianteProduto [id=" + id + ", nomeVariante=" + nomeVariante + ", descricaoVariante="
+				+ descricaoVariante + ", linkFoto=" + linkFoto + ", produto=" + produto + "]";
 	}
 	
 	
