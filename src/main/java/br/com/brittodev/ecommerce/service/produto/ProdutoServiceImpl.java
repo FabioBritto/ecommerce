@@ -3,6 +3,9 @@ package br.com.brittodev.ecommerce.service.produto;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import br.com.brittodev.ecommerce.dao.ProdutoDAO;
@@ -11,6 +14,8 @@ import br.com.brittodev.ecommerce.model.Produto;
 
 @Component
 public class ProdutoServiceImpl implements IProdutoService {
+	
+	private final static int PAGE_SIZE = 5;
 	
 	@Autowired
 	private ProdutoDAO produtoDAO;
@@ -31,8 +36,10 @@ public class ProdutoServiceImpl implements IProdutoService {
 	}
 
 	@Override
-	public List<Produto> findAll() {
-		return produtoDAO.findAll();
+	public Page<Produto> findAll(int numPagina) {
+		Pageable config = PageRequest.of(numPagina, PAGE_SIZE);
+		return produtoDAO.findAll(config);
+		
 	}
 
 	@Override
@@ -41,8 +48,9 @@ public class ProdutoServiceImpl implements IProdutoService {
 	}
 
 	@Override
-	public List<Produto> findByOrderByNomeProdutoAsc() {
-		return produtoDAO.findByOrderByNomeProdutoAsc();
+	public Page<Produto> findByOrderByNomeProdutoAsc(int numPagina) {
+		Pageable config = PageRequest.of(numPagina, PAGE_SIZE);
+		return produtoDAO.findByOrderByNomeProdutoAsc(config);
 	}
 	
 	@Override

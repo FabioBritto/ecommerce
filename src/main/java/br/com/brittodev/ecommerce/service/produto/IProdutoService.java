@@ -2,6 +2,8 @@ package br.com.brittodev.ecommerce.service.produto;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import br.com.brittodev.ecommerce.model.Categoria;
 import br.com.brittodev.ecommerce.model.Produto;
 
@@ -13,11 +15,11 @@ public interface IProdutoService {
 
 	public Produto findById(Integer id);
 
-	public List<Produto> findAll();
+	public Page<Produto> findAll(int numPagina);
 
 	public List<Produto> findByNomeProdutoContaining(String palavra);
 
-	public List<Produto> findByOrderByNomeProdutoAsc();
+	public Page<Produto> findByOrderByNomeProdutoAsc(int numPagina);
 	
 	public List<Produto> findByCategoria(Categoria categoria);
 

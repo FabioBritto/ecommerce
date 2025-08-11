@@ -3,6 +3,7 @@ package br.com.brittodev.ecommerce.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,9 +61,11 @@ public class ProdutoController {
 	}
 
 	@GetMapping("/produtos")
-	public ResponseEntity<List<Produto>> findAll() {
+	public ResponseEntity<Page<Produto>> findAll(
+			@RequestParam(name = "pagina",defaultValue = "0")
+					      int pagina) {
 		try {
-			return ResponseEntity.ok(service.findAll());
+			return ResponseEntity.ok(service.findAll(pagina));
 		} catch (Exception e) {
 			System.out.println("Erro ao recuperar Produtos: " + e.getMessage());
 			return ResponseEntity.notFound().build();
@@ -80,9 +83,9 @@ public class ProdutoController {
 	}
 
 	@GetMapping("/produtos/ordenado")
-	public ResponseEntity<List<Produto>> findByOrderByNomeAsc() {
+	public ResponseEntity<Page<Produto>> findByOrderByNomeAsc(@RequestParam(name = "pagina",defaultValue = "0") int pagina) {
 		try {
-			return ResponseEntity.ok(service.findByOrderByNomeProdutoAsc());
+			return ResponseEntity.ok(service.findByOrderByNomeProdutoAsc(pagina));
 		} catch (Exception e) {
 			System.out.println("Erro ao recuperar Produtos: " + e.getMessage());
 			return ResponseEntity.notFound().build();
