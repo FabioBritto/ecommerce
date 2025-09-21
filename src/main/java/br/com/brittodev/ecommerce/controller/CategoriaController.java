@@ -30,6 +30,7 @@ public class CategoriaController {
 			System.out.println("Erro ao cadastrar categoria: " + e.getMessage());
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
+
 	}
 	
 	@PutMapping("/categorias/{id}")

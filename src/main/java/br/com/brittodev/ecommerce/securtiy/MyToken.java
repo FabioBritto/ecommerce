@@ -1,12 +1,12 @@
 package br.com.brittodev.ecommerce.securtiy;
 
-public class Token {
+public class MyToken {
 
 	private String token;
 	
-	public Token() {}
+	public MyToken() {}
 
-	public Token(String token) {
+	public MyToken(String token) {
 		super();
 		this.token = token;
 	}

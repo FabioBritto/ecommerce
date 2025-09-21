@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.brittodev.ecommerce.model.Usuario;
+import br.com.brittodev.ecommerce.securtiy.MyToken;
 import br.com.brittodev.ecommerce.service.usuario.IUsuarioService;
 
 @RestController
@@ -30,5 +31,12 @@ public class UsuarioController {
 		Usuario atualizado = service.update(usuario);
 		if(atualizado != null) return ResponseEntity.ok(atualizado);
 		return ResponseEntity.badRequest().build();
+	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<MyToken> login(@RequestBody Usuario usuario) {
+		MyToken token = service.login(usuario.getLogin(), usuario.getSenha());
+		if(token != null) return ResponseEntity.ok(token);
+		return ResponseEntity.status(403).build();
 	}
 }
